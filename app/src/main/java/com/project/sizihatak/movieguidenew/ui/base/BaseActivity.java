@@ -69,13 +69,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         }
     }
 
-    //TODO
-    @Override
-    public void openActivityOnTokenExpire() {
-        //startActivity(LoginActivity.getStartIntent(this));
-        finish();
-    }
-
     public void setUnBinder(Unbinder unBinder) {
         mUnBinder = unBinder;
     }
