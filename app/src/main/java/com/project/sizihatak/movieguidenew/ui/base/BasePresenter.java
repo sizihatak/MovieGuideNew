@@ -1,7 +1,5 @@
 package com.project.sizihatak.movieguidenew.ui.base;
 
-import com.androidnetworking.error.ANError;
-
 public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
     private V mMvpView;
 
@@ -30,7 +28,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
 
     //TODO
     @Override
-    public void handleApiError(ANError error) {
+    public void handleApiError(String error) {
 
     }
 

@@ -1,7 +1,9 @@
 package com.project.sizihatak.movieguidenew.data.network;
 
-import com.project.sizihatak.movieguidenew.data.network.model.GetMovieResponse;
+import com.project.sizihatak.movieguidenew.data.network.model.ApiError;
 
-public interface ApiHelper {
-    Observable<GetMovieResponse> doGetMoviesListApiCall(GetMovieRequest request);
+public interface ApiHelper<T> {
+    T getApi();
+
+    ApiError obtainError(Throwable throwable);
 }

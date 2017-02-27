@@ -28,10 +28,10 @@ ext {
     minSdkVersion = 16
     targetSdkVersion = 25
     compileSdkVersion = 25
-    buildToolsVersion = '25.0.2'
+    buildToolsVersion = '25.2.0'
 
     // App dependencies
-    supportLibraryVersion = '25.1.1'
+    supportLibraryVersion = '25.2.0'
     gsonVersion = '2.8.0'
     calligraphyVersion = '2.2.0'
 
@@ -45,6 +45,8 @@ ext {
     placeholderviewVersion = '0.6.1'
     debugDBVersion = '1.0.0'
     timberVersion = '4.5.1'
+
+    okhttpVersion = '3.5.0'
 
     //Test dependencies
     junitVersion = '4.12'
