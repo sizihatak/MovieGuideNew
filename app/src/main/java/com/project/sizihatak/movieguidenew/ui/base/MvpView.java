@@ -2,7 +2,7 @@ package com.project.sizihatak.movieguidenew.ui.base;
 
 import android.support.annotation.StringRes;
 
-interface MvpView {
+public interface MvpView {
 
     void showLoading();
 

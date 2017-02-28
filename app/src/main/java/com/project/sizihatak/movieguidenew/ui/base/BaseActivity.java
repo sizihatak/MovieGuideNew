@@ -10,15 +10,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.amitshekhar.utils.NetworkUtils;
+import javax.inject.Inject;
 
 import butterknife.Unbinder;
 
-public abstract class BaseActivity extends AppCompatActivity implements MvpView, BaseFragment.Callback{
+public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>> extends AppCompatActivity implements
+        MvpView, BaseFragment.Callback {
+
+    @Inject
+    P presenter;
 
     private ProgressDialog mProgressDialog;
 
     private Unbinder mUnBinder;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //noinspection unchecked
+        presenter.onAttach((V) this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.onDetach();
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public boolean hasPermission(String permission){
