@@ -22,10 +22,6 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
         return mMvpView;
     }
 
-    public void checkViewAttached() {
-        if (!isViewAttached()) throw new MvpViewNotAttachedException();
-    }
-
     //TODO
     @Override
     public void handleApiError(String error) {
@@ -38,10 +34,4 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
 
     }
 
-    public static class MvpViewNotAttachedException extends RuntimeException {
-        public MvpViewNotAttachedException() {
-            super("Please call Presenter.onAttach(MvpView) before" +
-                    " requesting data to the Presenter");
-        }
-    }
 }

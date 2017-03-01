@@ -18,6 +18,7 @@ public class MovieGuideApp extends Application {
                     .appModule(new AppModule(this))
                     .build();
         }
+        appComponent.inject(this);
     }
 
     public AppComponent getAppComponent() {

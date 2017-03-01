@@ -2,7 +2,8 @@ package com.project.sizihatak.movieguidenew.di.module;
 
 import android.app.Activity;
 
-import com.project.sizihatak.movieguidenew.ui.main.Contract;
+import com.project.sizihatak.movieguidenew.ui.main.ContractMain;
+import com.project.sizihatak.movieguidenew.ui.main.MainPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -21,7 +22,7 @@ public class ActivityModule {
     }
 
     @Provides
-    Contract.IMainPresenter<Contract.IMainView> provideMainPresenter(Contract.IMainPresenter<Contract.IMainView> presenter) {
+    ContractMain.IMainPresenter<ContractMain.IMainView> provideMainPresenter(MainPresenter presenter) {
         return presenter;
     }
 

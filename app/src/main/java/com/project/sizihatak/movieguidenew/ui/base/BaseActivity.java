@@ -4,11 +4,17 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import com.project.sizihatak.movieguidenew.di.component.ActivityComponent;
+import com.project.sizihatak.movieguidenew.di.component.DaggerActivityComponent;
+import com.project.sizihatak.movieguidenew.di.module.ActivityModule;
 
 import javax.inject.Inject;
 
@@ -18,12 +24,25 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         MvpView, BaseFragment.Callback {
 
     @Inject
-    P presenter;
+    protected P presenter;
 
     private ProgressDialog mProgressDialog;
 
     private Unbinder mUnBinder;
 
+    private ActivityComponent mActivityComponent;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mActivityComponent = DaggerActivityComponent.builder()
+                .activityModule(new ActivityModule(this))
+                .build();
+    }
+
+    public ActivityComponent getActivityComponent() {
+        return mActivityComponent;
+    }
 
     @Override
     protected void onStart() {
