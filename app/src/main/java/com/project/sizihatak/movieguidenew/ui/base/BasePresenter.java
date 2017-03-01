@@ -4,14 +4,26 @@ import com.project.sizihatak.movieguidenew.data.DataManager;
 
 import javax.inject.Inject;
 
+import io.reactivex.disposables.CompositeDisposable;
+
 public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
     private V mMvpView;
 
+    private CompositeDisposable compositeDisposable;
     private DataManager dataManager;
 
     @Inject
-    public BasePresenter(DataManager dataManager) {
+    public BasePresenter(CompositeDisposable compositeDisposable, DataManager dataManager) {
+        this.compositeDisposable = compositeDisposable;
         this.dataManager = dataManager;
+    }
+
+    public CompositeDisposable getCompositeDisposable() {
+        return compositeDisposable;
+    }
+
+    public DataManager getDataManager() {
+        return dataManager;
     }
 
     @Override

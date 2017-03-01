@@ -5,11 +5,13 @@ import com.project.sizihatak.movieguidenew.ui.base.BasePresenter;
 
 import javax.inject.Inject;
 
-public class MainPresenter extends BasePresenter<ContractMain.IMainView> implements ContractMain.IMainPresenter<ContractMain.IMainView> {
+import io.reactivex.disposables.CompositeDisposable;
+
+public class MainPresenter extends BasePresenter<MainContract.View> implements MainContract.Presenter<MainContract.View> {
 
     @Inject
-    public MainPresenter(DataManager dataManager) {
-        super(dataManager);
+    public MainPresenter(CompositeDisposable compositeDisposable, DataManager dataManager) {
+        super(compositeDisposable, dataManager);
     }
 
 

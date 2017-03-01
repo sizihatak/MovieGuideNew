@@ -51,7 +51,7 @@ public class NetworkModule {
         return retrofit.create(MovieGuideApi.class);
     }
 
-    HttpLoggingInterceptor.Level getInterceptorLevel() {
+    private HttpLoggingInterceptor.Level getInterceptorLevel() {
         if (BuildConfig.DEBUG) {
             return HttpLoggingInterceptor.Level.BODY;
         } else {

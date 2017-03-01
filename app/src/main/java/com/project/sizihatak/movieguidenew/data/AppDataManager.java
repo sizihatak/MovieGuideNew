@@ -10,7 +10,7 @@ public class AppDataManager implements DataManager{
     private ApiHelper<MovieGuideApi> apiHelper;
 
     @Inject
-    public AppDataManager(ApiHelper<MovieGuideApi> apiHelper) {
+    AppDataManager(ApiHelper<MovieGuideApi> apiHelper) {
         this.apiHelper = apiHelper;
     }
 

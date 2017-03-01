@@ -5,8 +5,8 @@ import android.os.Bundle;
 import com.project.sizihatak.movieguidenew.R;
 import com.project.sizihatak.movieguidenew.ui.base.BaseActivity;
 
-public class MainActivity extends BaseActivity<ContractMain.IMainView, ContractMain.IMainPresenter<ContractMain.IMainView>>
-        implements ContractMain.IMainView {
+public class MainActivity extends BaseActivity<MainContract.View, MainContract.Presenter<MainContract.View>>
+        implements MainContract.View {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

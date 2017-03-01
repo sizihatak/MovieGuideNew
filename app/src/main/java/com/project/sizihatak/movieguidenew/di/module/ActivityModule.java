@@ -2,11 +2,12 @@ package com.project.sizihatak.movieguidenew.di.module;
 
 import android.app.Activity;
 
-import com.project.sizihatak.movieguidenew.ui.main.ContractMain;
+import com.project.sizihatak.movieguidenew.ui.main.MainContract;
 import com.project.sizihatak.movieguidenew.ui.main.MainPresenter;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 
 @Module
 public class ActivityModule {
@@ -22,8 +23,13 @@ public class ActivityModule {
     }
 
     @Provides
-    ContractMain.IMainPresenter<ContractMain.IMainView> provideMainPresenter(MainPresenter presenter) {
+    MainContract.Presenter<MainContract.View> provideMainPresenter(MainPresenter presenter) {
         return presenter;
+    }
+
+    @Provides
+    CompositeDisposable provideCompositeDisposable() {
+        return new CompositeDisposable();
     }
 
 }
