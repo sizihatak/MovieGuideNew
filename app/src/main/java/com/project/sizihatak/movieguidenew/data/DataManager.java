@@ -1,6 +1,7 @@
 package com.project.sizihatak.movieguidenew.data;
 
-import com.project.sizihatak.movieguidenew.data.network.ApiHelper;
+import com.project.sizihatak.movieguidenew.data.network.MovieGuideApi;
 
-public interface DataManager extends ApiHelper {
+public interface DataManager {
+    MovieGuideApi getApi();
 }

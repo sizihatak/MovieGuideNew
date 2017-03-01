@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.project.sizihatak.movieguidenew.MovieGuideApp;
 import com.project.sizihatak.movieguidenew.di.component.ActivityComponent;
 import com.project.sizihatak.movieguidenew.di.component.DaggerActivityComponent;
 import com.project.sizihatak.movieguidenew.di.module.ActivityModule;
@@ -37,6 +38,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         super.onCreate(savedInstanceState);
         mActivityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
+                .appComponent(((MovieGuideApp) getApplication()).getAppComponent())
                 .build();
     }
 

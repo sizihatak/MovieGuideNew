@@ -3,8 +3,8 @@ package com.project.sizihatak.movieguidenew.di.module;
 import android.app.Application;
 import android.content.Context;
 
-import com.project.sizihatak.movieguidenew.data.network.ApiHelper;
-import com.project.sizihatak.movieguidenew.data.network.ApiHelperImpl;
+import com.project.sizihatak.movieguidenew.data.AppDataManager;
+import com.project.sizihatak.movieguidenew.data.DataManager;
 
 import javax.inject.Singleton;
 
@@ -28,8 +28,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    ApiHelper provideApiHelper() {
-        return new ApiHelperImpl();
+    DataManager provideDataManager(AppDataManager appDataManager) {
+        return appDataManager;
     }
 
 }

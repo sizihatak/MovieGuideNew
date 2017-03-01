@@ -1,26 +1,37 @@
-package com.project.sizihatak.movieguidenew.data.network;
+package com.project.sizihatak.movieguidenew.di.module;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.project.sizihatak.movieguidenew.BuildConfig;
-import com.project.sizihatak.movieguidenew.data.network.model.ApiError;
+import com.project.sizihatak.movieguidenew.data.network.ApiHelper;
+import com.project.sizihatak.movieguidenew.data.network.AppApiHelper;
+import com.project.sizihatak.movieguidenew.data.network.MovieGuideApi;
 
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
+import dagger.Module;
+import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Singleton
-public class ApiHelperImpl implements ApiHelper<MovieGuideApi> {
+@Module
+public class NetworkModule {
 
-    private final MovieGuideApi api;
     private static final int TIME_OUT = 15;
 
-    public ApiHelperImpl() {
+    @Provides
+    @Singleton
+    ApiHelper<MovieGuideApi> provideApiHelper(AppApiHelper apiHelper) {
+        return apiHelper;
+    }
 
+
+    @Provides
+    @Singleton
+    MovieGuideApi provideMovieGuideApi() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -37,17 +48,6 @@ public class ApiHelperImpl implements ApiHelper<MovieGuideApi> {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build();
 
-        api = retrofit.create(MovieGuideApi.class);
-    }
-
-
-    @Override
-    public MovieGuideApi getApi() {
-        return api;
-    }
-
-    @Override
-    public ApiError obtainError(Throwable throwable) {
-        return null;
+        return retrofit.create(MovieGuideApi.class);
     }
 }
