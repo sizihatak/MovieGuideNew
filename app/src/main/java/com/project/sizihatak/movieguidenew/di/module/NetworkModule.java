@@ -33,7 +33,7 @@ public class NetworkModule {
     @Singleton
     MovieGuideApi provideMovieGuideApi() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        loggingInterceptor.setLevel(getInterceptorLevel());
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
@@ -49,5 +49,13 @@ public class NetworkModule {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build();
 
         return retrofit.create(MovieGuideApi.class);
+    }
+
+    HttpLoggingInterceptor.Level getInterceptorLevel() {
+        if (BuildConfig.DEBUG) {
+            return HttpLoggingInterceptor.Level.BODY;
+        } else {
+            return HttpLoggingInterceptor.Level.NONE;
+        }
     }
 }
