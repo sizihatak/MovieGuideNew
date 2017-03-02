@@ -24,4 +24,9 @@ public class AppApiHelper implements ApiHelper<MovieGuideApi>{
     public ApiError obtainError(Throwable throwable) {
         return null;
     }
+
+    @Override
+    public String getEndPoint() {
+        return ApiEndPoint.END_POINT;
+    }
 }

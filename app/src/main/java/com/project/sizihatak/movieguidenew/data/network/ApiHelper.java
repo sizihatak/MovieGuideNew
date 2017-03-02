@@ -6,4 +6,6 @@ public interface ApiHelper<T> {
     T getApi();
 
     ApiError obtainError(Throwable throwable);
+
+    String getEndPoint();
 }

@@ -4,4 +4,5 @@ import com.project.sizihatak.movieguidenew.data.network.MovieGuideApi;
 
 public interface DataManager {
     MovieGuideApi getApi();
+    String getEndPoint();
 }

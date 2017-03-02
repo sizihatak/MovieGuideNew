@@ -1,5 +1,8 @@
 package com.project.sizihatak.movieguidenew.data.network;
 
+import com.project.sizihatak.movieguidenew.data.network.model.GetMovieResponse;
+
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 
@@ -12,5 +15,5 @@ public interface MovieGuideApi {
 
     @Headers({TYPE_JSON, ACCEPT_JSON})
     @GET(GET_POPULAR_MOVIES)
-    Object getMovies();
+    Single<GetMovieResponse> getMovies();
 }

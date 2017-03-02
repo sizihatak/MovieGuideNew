@@ -1,5 +1,9 @@
 package com.project.sizihatak.movieguidenew.di.module;
 
+import android.util.Log;
+
+import com.ihsanbal.logging.Level;
+import com.ihsanbal.logging.LoggingInterceptor;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.project.sizihatak.movieguidenew.BuildConfig;
 import com.project.sizihatak.movieguidenew.data.network.ApiHelper;
@@ -13,7 +17,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -32,14 +35,11 @@ public class NetworkModule {
     @Provides
     @Singleton
     MovieGuideApi provideMovieGuideApi() {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(getInterceptorLevel());
-
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
-                .addInterceptor(loggingInterceptor)
+                .addInterceptor(getLoggingInterceptor())
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -51,11 +51,13 @@ public class NetworkModule {
         return retrofit.create(MovieGuideApi.class);
     }
 
-    private HttpLoggingInterceptor.Level getInterceptorLevel() {
-        if (BuildConfig.DEBUG) {
-            return HttpLoggingInterceptor.Level.BODY;
-        } else {
-            return HttpLoggingInterceptor.Level.NONE;
-        }
+    private LoggingInterceptor getLoggingInterceptor(){
+        return new LoggingInterceptor.Builder()
+                .loggable(BuildConfig.DEBUG)
+                .setLevel(Level.BASIC)
+                .log(Log.INFO)
+                .request("Request")
+                .response("Response")
+                .build();
     }
 }

@@ -16,6 +16,7 @@ import com.project.sizihatak.movieguidenew.MovieGuideApp;
 import com.project.sizihatak.movieguidenew.di.component.ActivityComponent;
 import com.project.sizihatak.movieguidenew.di.component.DaggerActivityComponent;
 import com.project.sizihatak.movieguidenew.di.module.ActivityModule;
+import com.project.sizihatak.movieguidenew.utils.CommonUtils;
 
 import javax.inject.Inject;
 
@@ -69,6 +70,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
     @Override
     public void showLoading() {
         hideLoading();
+        mProgressDialog = CommonUtils.showLoadingDialog(this);
     }
 
     @Override

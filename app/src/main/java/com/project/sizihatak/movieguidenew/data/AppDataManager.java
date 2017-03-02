@@ -19,4 +19,11 @@ public class AppDataManager implements DataManager{
     public MovieGuideApi getApi() {
         return apiHelper.getApi();
     }
+
+    @Override
+    public String getEndPoint() {
+        return apiHelper.getEndPoint();
+    }
+
+
 }
