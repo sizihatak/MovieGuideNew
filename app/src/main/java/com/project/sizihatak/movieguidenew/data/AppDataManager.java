@@ -25,5 +25,10 @@ public class AppDataManager implements DataManager{
         return apiHelper.getEndPoint();
     }
 
+    @Override
+    public String getPosterEndPoint() {
+        return apiHelper.getPosterEndPoint();
+    }
+
 
 }

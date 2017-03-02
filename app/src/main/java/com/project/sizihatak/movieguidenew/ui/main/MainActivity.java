@@ -48,13 +48,13 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     }
 
     @Override
-    public void showMovies(List<Movie> movies, String endPoint) {
+    public void showMovies(List<Movie> movies) {
         moviesRecyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, COLUMNS);
 
         moviesRecyclerView.setLayoutManager(layoutManager);
-        adapter = new MoviesAdapter(movies, this, endPoint);
+        adapter = new MoviesAdapter(movies, this);
         moviesRecyclerView.setAdapter(adapter);
     }
 

@@ -14,7 +14,7 @@ public class MainContract {
 
 
     public interface View extends MvpView {
-        void showMovies(List<Movie> movies, String endPoint);
+        void showMovies(List<Movie> movies);
 
         void onMovieClicked(Movie movie);
     }

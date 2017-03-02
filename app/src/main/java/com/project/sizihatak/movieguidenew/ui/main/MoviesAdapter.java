@@ -21,13 +21,11 @@ import butterknife.ButterKnife;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder>{
     private List<Movie> movies;
     private MainContract.View mainView;
-    private final String END_POINT;
     private Context context;
 
-    public MoviesAdapter(List<Movie> movies, MainContract.View mainView, String endPoint) {
+    public MoviesAdapter(List<Movie> movies, MainContract.View mainView) {
         this.movies = movies;
         this.mainView = mainView;
-        this.END_POINT = endPoint;
     }
 
     @Override
@@ -43,7 +41,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         holder.movie = movies.get(position);
         holder.name.setText(movies.get(position).getTitle());
         holder.itemView.setOnClickListener(holder);
-        Glide.with(context).load(END_POINT + holder.movie.getPosterPath())
+        Glide.with(context).load(holder.movie.getPosterPath())
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(holder.poster);
     }

@@ -1,6 +1,7 @@
 package com.project.sizihatak.movieguidenew.ui.main;
 
 import com.project.sizihatak.movieguidenew.data.DataManager;
+import com.project.sizihatak.movieguidenew.data.network.model.Movie;
 import com.project.sizihatak.movieguidenew.ui.base.BasePresenter;
 
 import javax.inject.Inject;
@@ -31,8 +32,15 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                     }
                 })
                 .doOnSuccess(response -> {
-                    getMvpView().showMovies(response.getMovies(), getDataManager().getEndPoint());
+                    for (Movie movie : response.getMovies()) {
+                        movie.setPosterFullPath(getDataManager().getPosterEndPoint());
+                    }
                 })
+                .doAfterSuccess(
+                        response -> {
+                            getMvpView().showMovies(response.getMovies());
+                        }
+                )
                 .subscribe((o, throwable) -> {
                     getCompositeDisposable().clear();
                     if (isViewAttached())

@@ -8,4 +8,6 @@ public interface ApiHelper<T> {
     ApiError obtainError(Throwable throwable);
 
     String getEndPoint();
+
+    String getPosterEndPoint();
 }

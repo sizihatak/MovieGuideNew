@@ -29,4 +29,9 @@ public class AppApiHelper implements ApiHelper<MovieGuideApi>{
     public String getEndPoint() {
         return ApiEndPoint.END_POINT;
     }
+
+    @Override
+    public String getPosterEndPoint() {
+        return ApiEndPoint.POSTER_END_POINT;
+    }
 }

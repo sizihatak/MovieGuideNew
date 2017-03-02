@@ -87,7 +87,7 @@ public class Movie implements Parcelable {
     }
 
     public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
+        this.posterPath = "http://image.tmdb.org/t/p/w342"+posterPath;
     }
 
     public String getBackdropPath() {
@@ -129,4 +129,9 @@ public class Movie implements Parcelable {
         parcel.writeString(title);
         parcel.writeDouble(voteAverage);
     }
+
+    public void setPosterFullPath(String posterEndPoint) {
+        this.posterPath = posterEndPoint + posterPath;
+    }
+
 }
