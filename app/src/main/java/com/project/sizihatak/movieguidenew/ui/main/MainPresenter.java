@@ -33,7 +33,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                 })
                 .doOnSuccess(response -> {
                     for (Movie movie : response.getMovies()) {
-                        movie.setPosterFullPath(getDataManager().getPosterEndPoint());
+                        movie.addEndPointToPosterPath(getDataManager().getPosterEndPoint());
                     }
                 })
                 .doAfterSuccess(

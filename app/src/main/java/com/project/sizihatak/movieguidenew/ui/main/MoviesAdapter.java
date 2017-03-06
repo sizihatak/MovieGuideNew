@@ -18,12 +18,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder>{
+class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
     private List<Movie> movies;
     private MainContract.View mainView;
     private Context context;
 
-    public MoviesAdapter(List<Movie> movies, MainContract.View mainView) {
+    MoviesAdapter(List<Movie> movies, MainContract.View mainView) {
         this.movies = movies;
         this.mainView = mainView;
     }
@@ -52,7 +52,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.movie_poster)
         ImageView poster;
         @BindView(R.id.title_background)
@@ -62,15 +62,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         public Movie movie;
 
-        public ViewHolder(View root)
-        {
+        public ViewHolder(View root) {
             super(root);
             ButterKnife.bind(this, root);
         }
 
         @Override
-        public void onClick(View view)
-        {
+        public void onClick(View view) {
             MoviesAdapter.this.mainView.onMovieClicked(movie);
         }
     }
