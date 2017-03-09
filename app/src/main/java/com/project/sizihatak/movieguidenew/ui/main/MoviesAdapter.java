@@ -52,7 +52,7 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.movie_poster)
         ImageView poster;
         @BindView(R.id.title_background)
@@ -60,9 +60,9 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
         @BindView(R.id.movie_name)
         TextView name;
 
-        public Movie movie;
+        Movie movie;
 
-        public ViewHolder(View root) {
+        ViewHolder(View root) {
             super(root);
             ButterKnife.bind(this, root);
         }

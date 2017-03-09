@@ -9,13 +9,14 @@ import java.util.List;
 public class MainContract {
 
     public interface Presenter<V extends MvpView> extends MvpPresenter<V> {
-        Object getMovies();
+        void getMovies();
+        void showMovieDetails(Movie movie);
     }
 
 
     public interface View extends MvpView {
         void showMovies(List<Movie> movies);
-
+        void openMovieDetailsActivity(Movie movie);
         void onMovieClicked(Movie movie);
     }
 

@@ -21,7 +21,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
 
     @Override
-    public Object getMovies() {
+    public void getMovies() {
         getDataManager().getApi().getMovies()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -45,9 +45,11 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                     getCompositeDisposable().clear();
                     if (isViewAttached())
                         getMvpView().hideLoading();
-                })
+                });
+    }
 
-        ;
-        return null;
+    @Override
+    public void showMovieDetails(Movie movie) {
+        getMvpView().openMovieDetailsActivity(movie);
     }
 }
