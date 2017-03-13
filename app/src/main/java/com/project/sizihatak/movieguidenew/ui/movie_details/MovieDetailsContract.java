@@ -6,7 +6,7 @@ import com.project.sizihatak.movieguidenew.ui.base.MvpView;
 
 import java.util.List;
 
-interface MovieDetailsContract {
+public interface MovieDetailsContract {
     interface Presenter<V extends MvpView> extends MvpPresenter<V> {
         void getMovieMovieDetails();
     }
