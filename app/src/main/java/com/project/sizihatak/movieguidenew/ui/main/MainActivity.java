@@ -15,6 +15,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.project.sizihatak.movieguidenew.ui.movie_details.MovieDetailsActivity.MOVIE;
+
 public class MainActivity extends BaseActivity<MainContract.View, MainContract.Presenter<MainContract.View>>
         implements MainContract.View {
 
@@ -22,7 +24,6 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     RecyclerView moviesRecyclerView;
 
     private final static int COLUMNS = 2;
-    private MoviesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +57,14 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, COLUMNS);
 
         moviesRecyclerView.setLayoutManager(layoutManager);
-        adapter = new MoviesAdapter(movies, this);
+        MoviesAdapter adapter = new MoviesAdapter(movies, this);
         moviesRecyclerView.setAdapter(adapter);
     }
 
     @Override
     public void openMovieDetailsActivity(Movie movie) {
         Intent intent = new Intent(this, MovieDetailsActivity.class);
-        intent.putExtra("MovieId", movie.getId());
+        intent.putExtra(MOVIE, movie);
         startActivity(intent);
     }
 

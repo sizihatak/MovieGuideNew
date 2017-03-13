@@ -134,4 +134,7 @@ public class Movie implements Parcelable {
         this.posterPath = posterEndPoint + posterPath;
     }
 
+    public void addEndPointToBackdropPath(String posterEndPoint) {
+        this.backdropPath = posterEndPoint + backdropPath;
+    }
 }
