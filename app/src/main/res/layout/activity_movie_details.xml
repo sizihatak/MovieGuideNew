@@ -5,14 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <ImageView
         android:id="@+id/imageView_movieDetails_poster"
         android:layout_width="0dp"
-        android:layout_height="220dp"
+        android:layout_height="wrap_content"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_movieDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:background="@android:color/transparent"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toTopOf="@+id/imageView_movieDetails_poster"
+        android:layout_marginTop="0dp">
+
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:id="@+id/textView_movieDetails_title"
@@ -22,7 +40,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -43,7 +60,6 @@
         android:id="@+id/textView_movieDetails_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
         android:textSize="12sp"
         app:layout_constraintLeft_toLeftOf="@+id/textView_movieDetails_date"
         app:layout_constraintTop_toBottomOf="@+id/textView_movieDetails_date"
@@ -53,7 +69,6 @@
         android:id="@+id/textView_movieDetails_summary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
         android:layout_marginTop="16dp"
         android:text="Summary"
         android:textAppearance="@style/TextAppearance.AppCompat"
@@ -65,13 +80,13 @@
         android:id="@+id/textView_movieDetails_descriptions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/textView_movieDetails_summary"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_movieDetails_summary"
-        tools:text="Description" />
+        tools:text="Description"
+        android:layout_marginEnd="16dp"/>
 
 </android.support.constraint.ConstraintLayout>

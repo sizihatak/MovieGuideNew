@@ -20,7 +20,7 @@ import static com.project.sizihatak.movieguidenew.ui.movie_details.MovieDetailsA
 public class MainActivity extends BaseActivity<MainContract.View, MainContract.Presenter<MainContract.View>>
         implements MainContract.View {
 
-    @BindView(R.id.movies_listing)
+    @BindView(R.id.recyclerView_main_movies)
     RecyclerView moviesRecyclerView;
 
     private final static int COLUMNS = 2;
@@ -31,7 +31,6 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
         setContentView(R.layout.activity_main);
         getActivityComponent().inject(this);
         setUnBinder(ButterKnife.bind(this));
-        setUp();
     }
 
     @Override
@@ -72,7 +71,4 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     public void onMovieClicked(Movie movie) {
         presenter.showMovieDetails(movie);
     }
-
-
-
 }

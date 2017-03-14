@@ -2,7 +2,7 @@ package com.project.sizihatak.movieguidenew.ui.movie_details;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,8 +11,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.project.sizihatak.movieguidenew.R;
 import com.project.sizihatak.movieguidenew.data.network.model.Movie;
 import com.project.sizihatak.movieguidenew.ui.base.BaseActivity;
-
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +35,9 @@ public class MovieDetailsActivity extends BaseActivity<MovieDetailsContract.View
     @BindView(R.id.textView_movieDetails_descriptions)
     TextView descriptionsTextView;
 
+    @BindView(R.id.toolbar_movieDetails)
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class MovieDetailsActivity extends BaseActivity<MovieDetailsContract.View
         getActivityComponent().inject(this);
         setUnBinder(ButterKnife.bind(this));
         setUp();
+        showMovieDetails(getIntent().getExtras().getParcelable(MOVIE));
     }
 
     @Override
@@ -53,12 +55,6 @@ public class MovieDetailsActivity extends BaseActivity<MovieDetailsContract.View
 
     @Override
     public void showMovieDetails(Movie movie) {
-
-    }
-
-    @Override
-    protected void setUp() {
-        Movie movie = getIntent().getExtras().getParcelable(MOVIE);
         Glide.with(getApplicationContext()).load(movie.getBackdropPath())
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(posterImageView);
@@ -66,5 +62,18 @@ public class MovieDetailsActivity extends BaseActivity<MovieDetailsContract.View
         dateTextView.setText(String.format(getString(R.string.movieDetails_releaseDate), movie.getReleaseDate()));
         ratingTextView.setText(String.format(getString(R.string.movieDetails_rating), String.valueOf(movie.getVoteAverage())));
         descriptionsTextView.setText(movie.getOverview());
+    }
+
+    @Override
+    protected void setUp() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
