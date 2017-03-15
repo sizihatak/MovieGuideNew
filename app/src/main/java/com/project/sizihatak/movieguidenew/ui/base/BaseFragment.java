@@ -7,13 +7,18 @@ import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import javax.inject.Inject;
+
 import butterknife.Unbinder;
 
-public abstract class BaseFragment extends Fragment implements MvpView {
+public abstract class BaseFragment<V extends MvpView, P extends MvpPresenter<V>> extends Fragment implements MvpView {
 
 
     private BaseActivity mActivity;
     private Unbinder mUnBinder;
+
+    @Inject
+    protected P presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,6 +34,19 @@ public abstract class BaseFragment extends Fragment implements MvpView {
             this.mActivity = activity;
             activity.onFragmentAttached();
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //noinspection unchecked
+        presenter.onAttach((V)this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.onDetach();
     }
 
 

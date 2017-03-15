@@ -1,4 +1,4 @@
-package com.project.sizihatak.movieguidenew.ui.main;
+package com.project.sizihatak.movieguidenew.ui.main.movies_list;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -20,12 +20,12 @@ import butterknife.ButterKnife;
 
 class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
     private List<Movie> movies;
-    private MainContract.View mainView;
+    private MoviesListContract.View moviesView;
     private Context context;
 
-    MoviesAdapter(List<Movie> movies, MainContract.View mainView) {
+    MoviesAdapter(List<Movie> movies, MoviesListContract.View moviesView) {
         this.movies = movies;
-        this.mainView = mainView;
+        this.moviesView = moviesView;
     }
 
     @Override
@@ -69,7 +69,7 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
         @Override
         public void onClick(View view) {
-            MoviesAdapter.this.mainView.onMovieClicked(movie);
+            MoviesAdapter.this.moviesView.onMovieClicked(movie);
         }
     }
 }
