@@ -22,7 +22,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Subscribe
     public void onEvent(OpenMovieDetailsEvent event) {
-        getMvpView().openMoviesDetailsScreen();
+        getMvpView().openMoviesDetailsScreen(event.getMovie());
     }
 
 

@@ -10,7 +10,6 @@ public class MainContract {
 
     }
 
-
     public interface View extends MvpView {
         void openMoviesDetailsScreen(Movie movie);
         void openMoviesListScreen();

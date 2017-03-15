@@ -1,4 +1,4 @@
-package com.project.sizihatak.movieguidenew.ui.main.movies_list;
+package com.project.sizihatak.movieguidenew.ui.main.list;
 
 import com.anadeainc.rxbus.Bus;
 import com.project.sizihatak.movieguidenew.data.DataManager;

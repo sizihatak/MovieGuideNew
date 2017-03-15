@@ -7,7 +7,7 @@
     tools:context="com.project.sizihatak.movieguidenew.ui.main.MainActivity">
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                 android:id="@+id/frameLayout_activityMain_fragmentContainer"
+                 android:id="@+id/frameLayout_main_fragmentContainer"
                  android:layout_width="match_parent"
                  android:layout_height="match_parent" />
 </RelativeLayout>

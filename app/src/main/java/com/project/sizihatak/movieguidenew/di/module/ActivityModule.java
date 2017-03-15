@@ -4,8 +4,6 @@ import android.app.Activity;
 
 import com.project.sizihatak.movieguidenew.ui.main.MainContract;
 import com.project.sizihatak.movieguidenew.ui.main.MainPresenter;
-import com.project.sizihatak.movieguidenew.ui.movie_details.MovieDetailsContract;
-import com.project.sizihatak.movieguidenew.ui.movie_details.MovieDetailsPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -26,11 +24,6 @@ public class ActivityModule {
 
     @Provides
     MainContract.Presenter<MainContract.View> provideMainPresenter(MainPresenter presenter) {
-        return presenter;
-    }
-
-    @Provides
-    MovieDetailsContract.Presenter<MovieDetailsContract.View> provideMovieDetails(MovieDetailsPresenter presenter) {
         return presenter;
     }
 
