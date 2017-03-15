@@ -1,8 +1,10 @@
 package com.project.sizihatak.movieguidenew.ui.main.movies_list;
 
+import com.anadeainc.rxbus.Bus;
 import com.project.sizihatak.movieguidenew.data.DataManager;
 import com.project.sizihatak.movieguidenew.data.network.model.Movie;
 import com.project.sizihatak.movieguidenew.ui.base.BasePresenter;
+import com.project.sizihatak.movieguidenew.ui.main.event.OpenMovieDetailsEvent;
 
 import javax.inject.Inject;
 
@@ -14,8 +16,8 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
         implements MoviesListContract.Presenter<MoviesListContract.View> {
 
     @Inject
-    public MoviesListPresenter(CompositeDisposable compositeDisposable, DataManager dataManager) {
-        super(compositeDisposable, dataManager);
+    public MoviesListPresenter(Bus bus, CompositeDisposable compositeDisposable, DataManager dataManager) {
+        super(bus, compositeDisposable, dataManager);
     }
 
     @Override
@@ -45,5 +47,10 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
                     if (isViewAttached())
                         getMvpView().hideLoading();
                 });
+    }
+
+    @Override
+    public void onMovieClicked(Movie movie) {
+        getEventBus().post(new OpenMovieDetailsEvent(movie));
     }
 }

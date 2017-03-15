@@ -1,5 +1,6 @@
 package com.project.sizihatak.movieguidenew.ui.main;
 
+import com.project.sizihatak.movieguidenew.data.network.model.Movie;
 import com.project.sizihatak.movieguidenew.ui.base.MvpPresenter;
 import com.project.sizihatak.movieguidenew.ui.base.MvpView;
 
@@ -11,7 +12,7 @@ public class MainContract {
 
 
     public interface View extends MvpView {
-        void openMoviesDetailsScreen();
+        void openMoviesDetailsScreen(Movie movie);
         void openMoviesListScreen();
     }
 

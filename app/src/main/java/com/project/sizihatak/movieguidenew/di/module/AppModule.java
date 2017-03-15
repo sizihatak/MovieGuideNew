@@ -3,6 +3,8 @@ package com.project.sizihatak.movieguidenew.di.module;
 import android.app.Application;
 import android.content.Context;
 
+import com.anadeainc.rxbus.Bus;
+import com.anadeainc.rxbus.BusProvider;
 import com.project.sizihatak.movieguidenew.data.AppDataManager;
 import com.project.sizihatak.movieguidenew.data.DataManager;
 
@@ -30,6 +32,12 @@ public class AppModule {
     @Singleton
     DataManager provideDataManager(AppDataManager appDataManager) {
         return appDataManager;
+    }
+
+    @Provides
+    @Singleton
+    Bus provideBus() {
+        return BusProvider.getInstance();
     }
 
 }

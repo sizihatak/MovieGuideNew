@@ -9,6 +9,7 @@ import java.util.List;
 public class MoviesListContract {
     public interface Presenter<V extends MvpView> extends MvpPresenter<V> {
         void getMovies();
+        void onMovieClicked(Movie movie);
     }
 
     public interface View extends MvpView {

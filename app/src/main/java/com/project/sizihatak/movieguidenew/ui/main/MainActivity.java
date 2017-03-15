@@ -3,6 +3,7 @@ package com.project.sizihatak.movieguidenew.ui.main;
 import android.os.Bundle;
 
 import com.project.sizihatak.movieguidenew.R;
+import com.project.sizihatak.movieguidenew.data.network.model.Movie;
 import com.project.sizihatak.movieguidenew.ui.base.BaseActivity;
 import com.project.sizihatak.movieguidenew.ui.main.movies_list.MoviesListFragment;
 
@@ -33,7 +34,7 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     }
 
     @Override
-    public void openMoviesDetailsScreen() {
+    public void openMoviesDetailsScreen(Movie movie) {
 
     }
 

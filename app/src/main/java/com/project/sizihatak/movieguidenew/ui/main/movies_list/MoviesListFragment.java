@@ -84,6 +84,6 @@ public class MoviesListFragment
 
     @Override
     public void onMovieClicked(Movie movie) {
-
+        presenter.onMovieClicked(movie);
     }
 }

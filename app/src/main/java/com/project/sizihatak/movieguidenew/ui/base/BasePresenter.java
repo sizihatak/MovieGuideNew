@@ -1,5 +1,6 @@
 package com.project.sizihatak.movieguidenew.ui.base;
 
+import com.anadeainc.rxbus.Bus;
 import com.project.sizihatak.movieguidenew.data.DataManager;
 
 import javax.inject.Inject;
@@ -9,21 +10,29 @@ import io.reactivex.disposables.CompositeDisposable;
 public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
     private V mMvpView;
 
+    private Bus eventBus;
+
     private CompositeDisposable compositeDisposable;
     private DataManager dataManager;
 
     @Inject
-    public BasePresenter(CompositeDisposable compositeDisposable, DataManager dataManager) {
+    public BasePresenter(Bus eventBus, CompositeDisposable compositeDisposable, DataManager dataManager) {
         this.compositeDisposable = compositeDisposable;
         this.dataManager = dataManager;
+        this.eventBus = eventBus;
+        this.eventBus.register(this);
     }
 
-    public CompositeDisposable getCompositeDisposable() {
+    protected CompositeDisposable getCompositeDisposable() {
         return compositeDisposable;
     }
 
-    public DataManager getDataManager() {
+    protected DataManager getDataManager() {
         return dataManager;
+    }
+
+    protected Bus getEventBus() {
+        return eventBus;
     }
 
     @Override
@@ -34,6 +43,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
     //TODO
     @Override
     public void onDetach() {
+        eventBus.unregister(this);
         mMvpView = null;
     }
 

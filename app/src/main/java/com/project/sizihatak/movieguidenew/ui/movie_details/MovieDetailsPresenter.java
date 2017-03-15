@@ -1,8 +1,8 @@
 package com.project.sizihatak.movieguidenew.ui.movie_details;
 
+import com.anadeainc.rxbus.Bus;
 import com.project.sizihatak.movieguidenew.data.DataManager;
 import com.project.sizihatak.movieguidenew.ui.base.BasePresenter;
-import com.project.sizihatak.movieguidenew.ui.main.MainContract;
 
 import javax.inject.Inject;
 
@@ -12,8 +12,8 @@ public class MovieDetailsPresenter extends BasePresenter<MovieDetailsContract.Vi
         implements MovieDetailsContract.Presenter<MovieDetailsContract.View> {
 
     @Inject
-    public MovieDetailsPresenter(CompositeDisposable compositeDisposable, DataManager dataManager) {
-        super(compositeDisposable, dataManager);
+    public MovieDetailsPresenter(Bus bus, CompositeDisposable compositeDisposable, DataManager dataManager) {
+        super(bus, compositeDisposable, dataManager);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.project.sizihatak.movieguidenew.di.component;
 
+import com.anadeainc.rxbus.Bus;
 import com.project.sizihatak.movieguidenew.MovieGuideApp;
 import com.project.sizihatak.movieguidenew.data.DataManager;
 import com.project.sizihatak.movieguidenew.di.module.AppModule;
@@ -16,4 +17,7 @@ public interface AppComponent {
     void inject(MovieGuideApp app);
 
     DataManager getDataManager();
+
+    Bus getBus();
+
 }
