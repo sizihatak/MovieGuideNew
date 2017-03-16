@@ -31,6 +31,7 @@ public class MoviesListFragment
 
     @BindView(R.id.recyclerView_main_movies)
     RecyclerView moviesRecyclerView;
+    private MoviesAdapter adapter;
 
     public static MoviesListFragment newInstance() {
         Bundle args = new Bundle();
@@ -57,28 +58,27 @@ public class MoviesListFragment
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         setUnBinder(ButterKnife.bind(this, view));
+        setUp(view);
         return view;
     }
 
     @Override
     public void onResume() {
-        super.onResume();
         presenter.getMovies();
+        super.onResume();
     }
 
     @Override
     protected void setUp(View view) {
-
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), COLUMNS);
+        moviesRecyclerView.setLayoutManager(layoutManager);
+        moviesRecyclerView.setAdapter(adapter);
     }
 
     @Override
     public void showMovies(List<Movie> movies) {
         moviesRecyclerView.setHasFixedSize(true);
-
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), COLUMNS);
-
-        moviesRecyclerView.setLayoutManager(layoutManager);
-        MoviesAdapter adapter = new MoviesAdapter(movies, this);
+        adapter = new MoviesAdapter(movies, this);
         moviesRecyclerView.setAdapter(adapter);
     }
 
