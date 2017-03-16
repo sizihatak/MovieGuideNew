@@ -20,7 +20,6 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
         this.compositeDisposable = compositeDisposable;
         this.dataManager = dataManager;
         this.eventBus = eventBus;
-        this.eventBus.register(this);
     }
 
     protected CompositeDisposable getCompositeDisposable() {
@@ -38,6 +37,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
     @Override
     public void onAttach(V mvpView) {
         mMvpView = mvpView;
+        this.eventBus.register(this);
     }
 
     //TODO

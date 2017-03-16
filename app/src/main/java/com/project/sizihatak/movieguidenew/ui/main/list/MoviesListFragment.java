@@ -33,6 +33,8 @@ public class MoviesListFragment
     RecyclerView moviesRecyclerView;
     private MoviesAdapter adapter;
 
+    private boolean isFirstStart = true;
+
     public static MoviesListFragment newInstance() {
         Bundle args = new Bundle();
         MoviesListFragment fragment = new MoviesListFragment();
@@ -64,7 +66,10 @@ public class MoviesListFragment
 
     @Override
     public void onResume() {
-        presenter.getMovies();
+        if (isFirstStart) {
+            presenter.getMovies();
+            isFirstStart = false;
+        }
         super.onResume();
     }
 

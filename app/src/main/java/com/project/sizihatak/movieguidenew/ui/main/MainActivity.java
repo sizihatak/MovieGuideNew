@@ -22,11 +22,6 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
     protected void setUp() {
 
     }
@@ -34,6 +29,17 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     @Override
     public void onError(String message) {
 
+    }
+
+    @Override
+    public void openMoviesListScreen() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag(MoviesListFragment.TAG);
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.frameLayout_main_fragmentContainer,
+                        (fragment == null) ? MoviesListFragment.newInstance() : fragment, MoviesListFragment.TAG)
+                .commit();
     }
 
     @Override
@@ -45,18 +51,6 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
                 .replace(R.id.frameLayout_main_fragmentContainer,
                         (fragment == null) ? DetailsFragment.newInstance(movie) : fragment, DetailsFragment.TAG)
                 .addToBackStack(DetailsFragment.TAG)
-                .commit();
-    }
-
-    @Override
-    public void openMoviesListScreen() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag(MoviesListFragment.TAG);
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.frameLayout_main_fragmentContainer,
-                        (fragment == null) ? MoviesListFragment.newInstance() : fragment, MoviesListFragment.TAG)
-                .addToBackStack(MoviesListFragment.TAG)
                 .commit();
     }
 }
