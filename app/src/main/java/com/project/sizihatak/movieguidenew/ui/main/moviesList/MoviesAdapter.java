@@ -1,4 +1,4 @@
-package com.project.sizihatak.movieguidenew.ui.main.list;
+package com.project.sizihatak.movieguidenew.ui.main.moviesList;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

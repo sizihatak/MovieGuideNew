@@ -1,8 +1,7 @@
-package com.project.sizihatak.movieguidenew.ui.main.details;
+package com.project.sizihatak.movieguidenew.ui.main.moviesDetails;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,48 +10,41 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.project.sizihatak.movieguidenew.MovieGuideApp;
 import com.project.sizihatak.movieguidenew.R;
 import com.project.sizihatak.movieguidenew.data.network.model.Movie;
-import com.project.sizihatak.movieguidenew.di.component.DaggerFragmentComponent;
-import com.project.sizihatak.movieguidenew.di.module.ActivityModule;
-import com.project.sizihatak.movieguidenew.di.module.FragmentModule;
 import com.project.sizihatak.movieguidenew.ui.base.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetailsFragment
-        extends BaseFragment<DetailsContract.View, DetailsContract.Presenter<DetailsContract.View>>
-        implements DetailsContract.View {
+public class MoviesDetailsFragment
+        extends BaseFragment<MoviesDetailsContract.View, MoviesDetailsContract.Presenter<MoviesDetailsContract.View>>
+        implements MoviesDetailsContract.View {
 
-    public static final String TAG = DetailsFragment.class.getName();
+    public static final String TAG = MoviesDetailsFragment.class.getName();
     public static final String MOVIE = "movie";
 
-    @BindView(R.id.imageView_details_poster)
+    @BindView(R.id.imageView_moviesDetails_poster)
     ImageView posterImageView;
 
-    @BindView(R.id.textView_details_title)
+    @BindView(R.id.textView_moviesDetails_title)
     TextView titleTextView;
 
-    @BindView(R.id.textView_details_date)
+    @BindView(R.id.textView_moviesDetails_date)
     TextView dateTextView;
 
-    @BindView(R.id.textView_details_rating)
+    @BindView(R.id.textView_moviesDetails_rating)
     TextView ratingTextView;
 
-    @BindView(R.id.textView_details_descriptions)
+    @BindView(R.id.textView_moviesDetails_descriptions)
     TextView descriptionsTextView;
 
-    @BindView(R.id.toolbar_details)
-    Toolbar toolbar;
 
-    public static DetailsFragment newInstance(Movie movie) {
+    public static MoviesDetailsFragment newInstance(Movie movie) {
         Bundle args = new Bundle();
         args.putParcelable(MOVIE, movie);
-        DetailsFragment fragment = new DetailsFragment();
+        MoviesDetailsFragment fragment = new MoviesDetailsFragment();
         fragment.setArguments(args);
-
         return fragment;
     }
 
@@ -62,7 +54,7 @@ public class DetailsFragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_movies_details, container, false);
         setUnBinder(ButterKnife.bind(this, view));
 
         showMovieDetails(getArguments().getParcelable(MOVIE));
@@ -83,11 +75,7 @@ public class DetailsFragment
 
     @Override
     public void onStart() {
-        DaggerFragmentComponent.builder()
-                .appComponent(((MovieGuideApp) getBaseActivity().getApplication()).getAppComponent())
-                .activityModule(new ActivityModule(getBaseActivity()))
-                .fragmentModule(new FragmentModule())
-                .build().inject(this);
+        getFragmentComponent().inject(this);
         super.onStart();
     }
 

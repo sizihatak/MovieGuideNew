@@ -7,12 +7,14 @@ import com.project.sizihatak.movieguidenew.ui.base.MvpView;
 public class MainContract {
 
     public interface Presenter<V extends MvpView> extends MvpPresenter<V> {
-
+        void onBackArrowClick();
     }
 
     public interface View extends MvpView {
         void openMoviesDetailsScreen(Movie movie);
         void openMoviesListScreen();
+        void showBackArrow();
+        void hideBackArrow();
     }
 
 }

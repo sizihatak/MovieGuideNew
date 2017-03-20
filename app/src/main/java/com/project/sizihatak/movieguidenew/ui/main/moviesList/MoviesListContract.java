@@ -1,4 +1,4 @@
-package com.project.sizihatak.movieguidenew.ui.main.list;
+package com.project.sizihatak.movieguidenew.ui.main.moviesList;
 
 import com.project.sizihatak.movieguidenew.data.network.model.Movie;
 import com.project.sizihatak.movieguidenew.ui.base.MvpPresenter;

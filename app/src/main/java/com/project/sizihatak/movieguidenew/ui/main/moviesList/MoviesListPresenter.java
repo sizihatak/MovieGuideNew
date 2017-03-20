@@ -1,4 +1,4 @@
-package com.project.sizihatak.movieguidenew.ui.main.list;
+package com.project.sizihatak.movieguidenew.ui.main.moviesList;
 
 import com.anadeainc.rxbus.Bus;
 import com.project.sizihatak.movieguidenew.data.DataManager;
@@ -21,17 +21,30 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
     }
 
     @Override
+    public void onAttach(MoviesListContract.View mvpView) {
+        super.onAttach(mvpView);
+        if (state == State.EMPTY) {
+            getMovies();
+        }
+    }
+
+    @Override
     public void getMovies() {
         getDataManager().getApi().getMovies()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable -> getMvpView().showLoading())
+                .doOnSubscribe(disposable -> {
+                    state = State.LOADING;
+                    getMvpView().showLoading();
+                })
                 .doOnError(throwable -> {
+                    state = State.ERROR;
                     if (isViewAttached()) {
                         getMvpView().onError("Error on server");
                     }
                 })
                 .doOnSuccess(response -> {
+                    state = State.IDEAL;
                     for (Movie movie : response.getMovies()) {
                         movie.addEndPointToPosterPath(getDataManager().getPosterEndPoint());
                         movie.addEndPointToBackdropPath(getDataManager().getPosterEndPoint());
@@ -39,6 +52,7 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
                 })
                 .doAfterSuccess(
                         response -> {
+
                             getMvpView().showMovies(response.getMovies());
                         }
                 )

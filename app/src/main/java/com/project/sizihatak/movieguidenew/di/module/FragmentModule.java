@@ -1,22 +1,25 @@
 package com.project.sizihatak.movieguidenew.di.module;
 
-import com.project.sizihatak.movieguidenew.ui.main.details.DetailsContract;
-import com.project.sizihatak.movieguidenew.ui.main.details.DetailsPresenter;
-import com.project.sizihatak.movieguidenew.ui.main.list.MoviesListContract;
-import com.project.sizihatak.movieguidenew.ui.main.list.MoviesListPresenter;
+import com.project.sizihatak.movieguidenew.di.scope.PerFragment;
+import com.project.sizihatak.movieguidenew.ui.main.moviesDetails.MoviesDetailsContract;
+import com.project.sizihatak.movieguidenew.ui.main.moviesDetails.MoviesDetailsPresenter;
+import com.project.sizihatak.movieguidenew.ui.main.moviesList.MoviesListContract;
+import com.project.sizihatak.movieguidenew.ui.main.moviesList.MoviesListPresenter;
 
 import dagger.Module;
 import dagger.Provides;
 
 @Module
 public class FragmentModule {
+    @PerFragment
     @Provides
     MoviesListContract.Presenter<MoviesListContract.View> provideMoviesListPresenter(MoviesListPresenter presenter) {
         return presenter;
     }
 
+    @PerFragment
     @Provides
-    DetailsContract.Presenter<DetailsContract.View> provideDetailsPresenter(DetailsPresenter presenter) {
+    MoviesDetailsContract.Presenter<MoviesDetailsContract.View> provideDetailsPresenter(MoviesDetailsPresenter presenter) {
         return presenter;
     }
 }

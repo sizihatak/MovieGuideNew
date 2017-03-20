@@ -22,13 +22,18 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Subscribe
     public void onEvent(OpenMovieDetailsEvent event) {
+        getMvpView().showBackArrow();
         getMvpView().openMoviesDetailsScreen(event.getMovie());
     }
-
 
     @Subscribe
     public void onEvent(OpenMoviesListEvent event) {
         getMvpView().openMoviesListScreen();
     }
 
+    @Override
+    public void onBackArrowClick() {
+        getMvpView().hideBackArrow();
+        getMvpView().openMoviesListScreen();
+    }
 }

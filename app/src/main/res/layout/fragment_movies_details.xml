@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView_details_poster"
+        android:id="@+id/imageView_moviesDetails_poster"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintHorizontal_bias="0.0"
@@ -14,24 +14,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_details"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:background="@android:color/transparent"
-        android:minHeight="?attr/actionBarSize"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toTopOf="@+id/imageView_details_poster"
-        android:layout_marginTop="0dp">
-
-    </android.support.v7.widget.Toolbar>
-
     <TextView
-        android:id="@+id/textView_details_title"
+        android:id="@+id/textView_moviesDetails_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -41,49 +25,49 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_details_poster"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_moviesDetails_poster"
         tools:text="Interstellar" />
 
     <TextView
-        android:id="@+id/textView_details_date"
+        android:id="@+id/textView_moviesDetails_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="12sp"
-        app:layout_constraintLeft_toLeftOf="@+id/textView_details_title"
-        app:layout_constraintTop_toBottomOf="@+id/textView_details_title"
+        app:layout_constraintLeft_toLeftOf="@+id/textView_moviesDetails_title"
+        app:layout_constraintTop_toBottomOf="@+id/textView_moviesDetails_title"
         tools:text="Accelerate Date: 2014-11-06" />
 
     <TextView
-        android:id="@+id/textView_details_rating"
+        android:id="@+id/textView_moviesDetails_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
-        app:layout_constraintLeft_toLeftOf="@+id/textView_details_date"
-        app:layout_constraintTop_toBottomOf="@+id/textView_details_date"
+        app:layout_constraintLeft_toLeftOf="@+id/textView_moviesDetails_date"
+        app:layout_constraintTop_toBottomOf="@+id/textView_moviesDetails_date"
         tools:text="8.24/10" />
 
     <TextView
-        android:id="@+id/textView_details_summary"
+        android:id="@+id/textView_moviesDetails_summary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Summary"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="@+id/textView_details_rating"
-        app:layout_constraintTop_toBottomOf="@+id/textView_details_rating" />
+        app:layout_constraintLeft_toLeftOf="@+id/textView_moviesDetails_rating"
+        app:layout_constraintTop_toBottomOf="@+id/textView_moviesDetails_rating" />
 
     <TextView
-        android:id="@+id/textView_details_descriptions"
+        android:id="@+id/textView_moviesDetails_descriptions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/textView_details_summary"
+        app:layout_constraintLeft_toLeftOf="@+id/textView_moviesDetails_summary"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_details_summary"
+        app:layout_constraintTop_toBottomOf="@+id/textView_moviesDetails_summary"
         tools:text="Description"
         android:layout_marginEnd="16dp"/>
 

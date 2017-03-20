@@ -7,6 +7,13 @@ import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.project.sizihatak.movieguidenew.MovieGuideApp;
+import com.project.sizihatak.movieguidenew.di.component.DaggerFragmentComponent;
+import com.project.sizihatak.movieguidenew.di.component.FragmentComponent;
+import com.project.sizihatak.movieguidenew.di.module.ActivityModule;
+import com.project.sizihatak.movieguidenew.di.module.FragmentModule;
+import com.project.sizihatak.movieguidenew.di.scope.PerFragment;
+
 import javax.inject.Inject;
 
 import butterknife.Unbinder;
@@ -16,14 +23,26 @@ public abstract class BaseFragment<V extends MvpView, P extends MvpPresenter<V>>
 
     private BaseActivity mActivity;
     private Unbinder mUnBinder;
+    private FragmentComponent fragmentComponent;
 
+
+    @PerFragment
     @Inject
     protected P presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fragmentComponent = DaggerFragmentComponent.builder()
+                .appComponent(((MovieGuideApp) getBaseActivity().getApplication()).getAppComponent())
+                .activityModule(new ActivityModule(getBaseActivity()))
+                .fragmentModule(new FragmentModule())
+                .build();
         setHasOptionsMenu(false);
+    }
+
+    public FragmentComponent getFragmentComponent() {
+        return fragmentComponent;
     }
 
     @Override

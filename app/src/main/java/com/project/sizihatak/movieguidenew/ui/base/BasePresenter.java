@@ -15,6 +15,8 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
     private CompositeDisposable compositeDisposable;
     private DataManager dataManager;
 
+    protected State state = State.EMPTY;
+
     @Inject
     public BasePresenter(Bus eventBus, CompositeDisposable compositeDisposable, DataManager dataManager) {
         this.compositeDisposable = compositeDisposable;
@@ -65,6 +67,14 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
     @Override
     public void setUserAsLoggedOut() {
 
+    }
+
+    protected enum State {
+        EMPTY,
+        LOADING,
+        PARTIAL,
+        ERROR,
+        IDEAL
     }
 
 }
