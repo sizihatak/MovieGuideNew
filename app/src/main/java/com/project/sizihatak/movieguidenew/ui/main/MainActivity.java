@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity<MainContract.View, MainContract.Presenter<MainContract.View>>
         implements MainContract.View {
 
+    private static final String TAG = MainActivity.class.getName();
     @BindView(R.id.toolbar_main)
     Toolbar toolbar;
 
@@ -76,13 +77,11 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     @Override
     public void openMoviesDetailsScreen(Movie movie) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag(MoviesDetailsFragment.TAG);
+        MoviesDetailsFragment fragment = (MoviesDetailsFragment) fragmentManager.findFragmentByTag(MoviesDetailsFragment.TAG);
         if (fragment == null) {
             fragment = MoviesDetailsFragment.newInstance(movie);
         } else {
-            Bundle args = new Bundle();
-            args.putParcelable(MoviesDetailsFragment.MOVIE, movie);
-            fragment.setArguments(args);
+            fragment.getArguments().putAll(MoviesDetailsFragment.initArgs(movie));
         }
         fragmentManager
                 .beginTransaction()

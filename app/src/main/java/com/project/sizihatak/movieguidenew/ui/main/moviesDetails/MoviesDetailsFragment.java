@@ -1,6 +1,7 @@
 package com.project.sizihatak.movieguidenew.ui.main.moviesDetails;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,14 +42,17 @@ public class MoviesDetailsFragment
 
 
     public static MoviesDetailsFragment newInstance(Movie movie) {
-        Bundle args = new Bundle();
-        args.putParcelable(MOVIE, movie);
         MoviesDetailsFragment fragment = new MoviesDetailsFragment();
-        fragment.setArguments(args);
+        fragment.setArguments(initArgs(movie));
         return fragment;
     }
 
-
+    @NonNull
+    public static Bundle initArgs(Movie movie) {
+        Bundle args = new Bundle();
+        args.putParcelable(MOVIE, movie);
+        return args;
+    }
 
     @Nullable
     @Override
@@ -63,6 +67,9 @@ public class MoviesDetailsFragment
     }
 
     public void showMovieDetails(Movie movie) {
+        if (movie == null) {
+            return;
+        }
         Glide.with(getContext()).load(movie.getBackdropPath())
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(posterImageView);
@@ -72,19 +79,20 @@ public class MoviesDetailsFragment
         descriptionsTextView.setText(movie.getOverview());
     }
 
-
     @Override
     public void onStart() {
         getFragmentComponent().inject(this);
         super.onStart();
     }
 
-    //TODO create Action bar
     @Override
     protected void setUp(View view) {
-        /*setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");*/
+    }
+
+    @Override
+    public void onDestroyView() {
+        getArguments().clear();
+        super.onDestroyView();
     }
 
 }

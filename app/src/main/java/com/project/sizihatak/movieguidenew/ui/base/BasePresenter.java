@@ -72,7 +72,6 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
     protected enum State {
         EMPTY,
         LOADING,
-        PARTIAL,
         ERROR,
         IDEAL
     }
