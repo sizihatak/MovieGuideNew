@@ -13,19 +13,23 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.project.sizihatak.movieguidenew.R;
 import com.project.sizihatak.movieguidenew.data.network.model.Movie;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
-    private List<Movie> movies;
+    private List<Movie> movies = new ArrayList<>();
     private MoviesListContract.View moviesView;
     private Context context;
 
-    MoviesAdapter(List<Movie> movies, MoviesListContract.View moviesView) {
-        this.movies = movies;
+    MoviesAdapter(MoviesListContract.View moviesView) {
         this.moviesView = moviesView;
+    }
+
+    void setMovies(List<Movie> movies) {
+        this.movies = movies;
     }
 
     @Override
@@ -38,10 +42,10 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.movie = movies.get(position);
+        Movie movie = movies.get(position);
         holder.name.setText(movies.get(position).getTitle());
         holder.itemView.setOnClickListener(holder);
-        Glide.with(context).load(holder.movie.getPosterPath())
+        Glide.with(context).load(movie.getPosterPath())
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(holder.poster);
     }
@@ -60,8 +64,6 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
         @BindView(R.id.movie_name)
         TextView name;
 
-        Movie movie;
-
         ViewHolder(View root) {
             super(root);
             ButterKnife.bind(this, root);
@@ -69,7 +71,7 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
         @Override
         public void onClick(View view) {
-            MoviesAdapter.this.moviesView.onMovieClicked(movie);
+            MoviesAdapter.this.moviesView.onMovieClick(getAdapterPosition());
         }
     }
 }

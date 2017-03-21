@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.project.sizihatak.movieguidenew.R;
-import com.project.sizihatak.movieguidenew.data.network.model.Movie;
 import com.project.sizihatak.movieguidenew.ui.base.BaseActivity;
 import com.project.sizihatak.movieguidenew.ui.main.moviesDetails.MoviesDetailsFragment;
 import com.project.sizihatak.movieguidenew.ui.main.moviesList.MoviesListFragment;
@@ -27,10 +26,15 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getActivityComponent().inject(this);
         setUnBinder(ButterKnife.bind(this));
         setUp();
         openMoviesListScreen();
+    }
+
+    @Override
+    protected void inject() {
+        getActivityComponent().inject(this);
+
     }
 
     @Override
@@ -47,6 +51,12 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     @Override
     public void hideBackArrow(){
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+    }
+
+    @Override
+    public void onBackPressed() {
+        presenter.onBackClick();
+        super.onBackPressed();
     }
 
     @Override
@@ -75,13 +85,13 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     }
 
     @Override
-    public void openMoviesDetailsScreen(Movie movie) {
+    public void openMoviesDetailsScreen(Bundle args) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         MoviesDetailsFragment fragment = (MoviesDetailsFragment) fragmentManager.findFragmentByTag(MoviesDetailsFragment.TAG);
         if (fragment == null) {
-            fragment = MoviesDetailsFragment.newInstance(movie);
+            fragment = MoviesDetailsFragment.newInstance(args);
         } else {
-            fragment.getArguments().putAll(MoviesDetailsFragment.initArgs(movie));
+            fragment.getArguments().putAll(args);
         }
         fragmentManager
                 .beginTransaction()

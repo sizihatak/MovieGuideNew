@@ -41,11 +41,14 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
                 .activityModule(new ActivityModule(this))
                 .appComponent(((MovieGuideApp) getApplication()).getAppComponent())
                 .build();
+        inject();
     }
 
-    public ActivityComponent getActivityComponent() {
+    protected ActivityComponent getActivityComponent() {
         return mActivityComponent;
     }
+
+    protected abstract void inject();
 
     @Override
     protected void onStart() {

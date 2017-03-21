@@ -1,11 +1,14 @@
 package com.project.sizihatak.movieguidenew.ui.main;
 
+import android.os.Bundle;
+
 import com.anadeainc.rxbus.Bus;
 import com.anadeainc.rxbus.Subscribe;
 import com.project.sizihatak.movieguidenew.data.DataManager;
 import com.project.sizihatak.movieguidenew.ui.base.BasePresenter;
 import com.project.sizihatak.movieguidenew.ui.main.event.OpenMovieDetailsEvent;
 import com.project.sizihatak.movieguidenew.ui.main.event.OpenMoviesListEvent;
+import com.project.sizihatak.movieguidenew.ui.main.moviesDetails.MoviesDetailsFragment;
 
 import javax.inject.Inject;
 
@@ -23,7 +26,9 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     @Subscribe
     public void onEvent(OpenMovieDetailsEvent event) {
         getMvpView().showBackArrow();
-        getMvpView().openMoviesDetailsScreen(event.getMovie());
+        Bundle args = new Bundle();
+        args.putParcelable(MoviesDetailsFragment.MOVIE, event.getMovie());
+        getMvpView().openMoviesDetailsScreen(args);
     }
 
     @Subscribe
@@ -35,5 +40,10 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     public void onBackArrowClick() {
         getMvpView().hideBackArrow();
         getMvpView().openMoviesListScreen();
+    }
+
+    @Override
+    public void onBackClick() {
+        getMvpView().hideBackArrow();
     }
 }

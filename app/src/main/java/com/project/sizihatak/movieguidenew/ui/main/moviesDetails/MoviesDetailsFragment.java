@@ -1,7 +1,6 @@
 package com.project.sizihatak.movieguidenew.ui.main.moviesDetails;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,18 +39,10 @@ public class MoviesDetailsFragment
     @BindView(R.id.textView_moviesDetails_descriptions)
     TextView descriptionsTextView;
 
-
-    public static MoviesDetailsFragment newInstance(Movie movie) {
+    public static MoviesDetailsFragment newInstance(Bundle args) {
         MoviesDetailsFragment fragment = new MoviesDetailsFragment();
-        fragment.setArguments(initArgs(movie));
+        fragment.setArguments(args);
         return fragment;
-    }
-
-    @NonNull
-    public static Bundle initArgs(Movie movie) {
-        Bundle args = new Bundle();
-        args.putParcelable(MOVIE, movie);
-        return args;
     }
 
     @Nullable
@@ -94,5 +85,4 @@ public class MoviesDetailsFragment
         getArguments().clear();
         super.onDestroyView();
     }
-
 }

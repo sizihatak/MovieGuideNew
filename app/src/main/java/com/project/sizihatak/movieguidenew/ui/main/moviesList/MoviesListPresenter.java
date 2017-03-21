@@ -6,6 +6,9 @@ import com.project.sizihatak.movieguidenew.data.network.model.Movie;
 import com.project.sizihatak.movieguidenew.ui.base.BasePresenter;
 import com.project.sizihatak.movieguidenew.ui.main.event.OpenMovieDetailsEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -14,6 +17,9 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
         implements MoviesListContract.Presenter<MoviesListContract.View> {
+
+    private List<Movie> movies = new ArrayList<>();
+
 
     @Inject
     public MoviesListPresenter(Bus bus, CompositeDisposable compositeDisposable, DataManager dataManager) {
@@ -52,8 +58,8 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
                 })
                 .doAfterSuccess(
                         response -> {
-
-                            getMvpView().showMovies(response.getMovies());
+                            movies = response.getMovies();
+                            getMvpView().showMovies(movies);
                         }
                 )
                 .subscribe((o, throwable) -> {
@@ -64,7 +70,7 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
     }
 
     @Override
-    public void onMovieClicked(Movie movie) {
-        getEventBus().post(new OpenMovieDetailsEvent(movie));
+    public void onMoviePressed(int position) {
+        getEventBus().post(new OpenMovieDetailsEvent(movies.get(position)));
     }
 }

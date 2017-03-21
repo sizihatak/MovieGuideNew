@@ -9,11 +9,11 @@ import java.util.List;
 public class MoviesListContract {
     public interface Presenter<V extends MvpView> extends MvpPresenter<V> {
         void getMovies();
-        void onMovieClicked(Movie movie);
+        void onMoviePressed(int position);
     }
 
     public interface View extends MvpView {
         void showMovies(List<Movie> movies);
-        void onMovieClicked(Movie movie);
+        void onMovieClick(int position);
     }
 }

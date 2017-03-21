@@ -1,6 +1,7 @@
 package com.project.sizihatak.movieguidenew.ui.main;
 
-import com.project.sizihatak.movieguidenew.data.network.model.Movie;
+import android.os.Bundle;
+
 import com.project.sizihatak.movieguidenew.ui.base.MvpPresenter;
 import com.project.sizihatak.movieguidenew.ui.base.MvpView;
 
@@ -8,10 +9,11 @@ public class MainContract {
 
     public interface Presenter<V extends MvpView> extends MvpPresenter<V> {
         void onBackArrowClick();
+        void onBackClick();
     }
 
     public interface View extends MvpView {
-        void openMoviesDetailsScreen(Movie movie);
+        void openMoviesDetailsScreen(Bundle args);
         void openMoviesListScreen();
         void showBackArrow();
         void hideBackArrow();

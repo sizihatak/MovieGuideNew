@@ -47,28 +47,33 @@ public class MoviesListFragment
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        adapter = new MoviesAdapter(this);
+    }
+
+    @Override
     public void onStart() {
         getFragmentComponent().inject(this);
         super.onStart();
     }
 
-
     @Override
     protected void setUp(View view) {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), COLUMNS);
+        moviesRecyclerView.setHasFixedSize(true);
         moviesRecyclerView.setLayoutManager(layoutManager);
         moviesRecyclerView.setAdapter(adapter);
     }
 
     @Override
     public void showMovies(List<Movie> movies) {
-        moviesRecyclerView.setHasFixedSize(true);
-        adapter = new MoviesAdapter(movies, this);
-        moviesRecyclerView.setAdapter(adapter);
+        adapter.setMovies(movies);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onMovieClicked(Movie movie) {
-        presenter.onMovieClicked(movie);
+    public void onMovieClick(int position) {
+        presenter.onMoviePressed(position);
     }
 }
