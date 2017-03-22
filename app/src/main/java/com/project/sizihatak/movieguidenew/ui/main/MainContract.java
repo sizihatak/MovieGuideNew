@@ -8,7 +8,6 @@ import com.project.sizihatak.movieguidenew.ui.base.MvpView;
 public class MainContract {
 
     public interface Presenter<V extends MvpView> extends MvpPresenter<V> {
-        void onBackArrowClick();
         void onBackClick();
     }
 
@@ -17,6 +16,7 @@ public class MainContract {
         void openMoviesListScreen();
         void showBackArrow();
         void hideBackArrow();
+        void onPreviousScreen();
     }
 
 }

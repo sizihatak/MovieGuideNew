@@ -7,7 +7,6 @@ import com.anadeainc.rxbus.Subscribe;
 import com.project.sizihatak.movieguidenew.data.DataManager;
 import com.project.sizihatak.movieguidenew.ui.base.BasePresenter;
 import com.project.sizihatak.movieguidenew.ui.main.event.OpenMovieDetailsEvent;
-import com.project.sizihatak.movieguidenew.ui.main.event.OpenMoviesListEvent;
 import com.project.sizihatak.movieguidenew.ui.main.moviesDetails.MoviesDetailsFragment;
 
 import javax.inject.Inject;
@@ -31,19 +30,9 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         getMvpView().openMoviesDetailsScreen(args);
     }
 
-    @Subscribe
-    public void onEvent(OpenMoviesListEvent event) {
-        getMvpView().openMoviesListScreen();
-    }
-
-    @Override
-    public void onBackArrowClick() {
-        getMvpView().hideBackArrow();
-        getMvpView().openMoviesListScreen();
-    }
-
     @Override
     public void onBackClick() {
         getMvpView().hideBackArrow();
+        getMvpView().onPreviousScreen();
     }
 }

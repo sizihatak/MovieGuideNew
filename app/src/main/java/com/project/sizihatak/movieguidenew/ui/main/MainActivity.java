@@ -44,25 +44,24 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     }
 
     @Override
-    public void showBackArrow(){
+    public void showBackArrow() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
-    public void hideBackArrow(){
+    public void hideBackArrow() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
     @Override
     public void onBackPressed() {
         presenter.onBackClick();
-        super.onBackPressed();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            presenter.onBackArrowClick();
+            presenter.onBackClick();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -71,6 +70,11 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     @Override
     public void onError(String message) {
 
+    }
+
+    @Override
+    public void onPreviousScreen() {
+        super.onBackPressed();
     }
 
     @Override
@@ -87,7 +91,8 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     @Override
     public void openMoviesDetailsScreen(Bundle args) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        MoviesDetailsFragment fragment = (MoviesDetailsFragment) fragmentManager.findFragmentByTag(MoviesDetailsFragment.TAG);
+        MoviesDetailsFragment fragment = (MoviesDetailsFragment)
+                fragmentManager.findFragmentByTag(MoviesDetailsFragment.TAG);
         if (fragment == null) {
             fragment = MoviesDetailsFragment.newInstance(args);
         } else {
