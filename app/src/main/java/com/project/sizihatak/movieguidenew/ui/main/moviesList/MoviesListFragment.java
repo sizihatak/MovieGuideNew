@@ -60,10 +60,25 @@ public class MoviesListFragment
 
     @Override
     protected void setUp(View view) {
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), COLUMNS);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), COLUMNS);
         moviesRecyclerView.setHasFixedSize(true);
         moviesRecyclerView.setLayoutManager(layoutManager);
         moviesRecyclerView.setAdapter(adapter);
+        moviesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+                presenter.getMovies(visibleItemCount, totalItemCount, firstVisibleItemPosition);
+            }
+        });
     }
 
     @Override

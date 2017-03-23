@@ -18,7 +18,10 @@ import io.reactivex.schedulers.Schedulers;
 public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
         implements MoviesListContract.Presenter<MoviesListContract.View> {
 
+    private static final String TAG = "MoviesListPresenter";
     private List<Movie> movies = new ArrayList<>();
+    private int currentPage;
+    private int totalPages;
 
 
     @Inject
@@ -34,9 +37,8 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
         }
     }
 
-    @Override
-    public void getMovies() {
-        getDataManager().getApi().getMovies()
+    private void getMovies() {
+        getDataManager().getApi().getMovies(++currentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
@@ -50,7 +52,8 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
                     }
                 })
                 .doOnSuccess(response -> {
-                    state = State.IDEAL;
+                    currentPage = response.getPage();
+                    totalPages = response.getTotalPages();
                     for (Movie movie : response.getMovies()) {
                         movie.addEndPointToPosterPath(getDataManager().getPosterEndPoint());
                         movie.addEndPointToBackdropPath(getDataManager().getPosterEndPoint());
@@ -58,8 +61,9 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
                 })
                 .doAfterSuccess(
                         response -> {
-                            movies = response.getMovies();
+                            movies.addAll(response.getMovies());
                             getMvpView().showMovies(movies);
+                            state = State.IDEAL;
                         }
                 )
                 .subscribe((o, throwable) -> {
@@ -72,5 +76,16 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
     @Override
     public void onMoviePressed(int position) {
         getEventBus().post(new OpenMovieDetailsEvent(movies.get(position)));
+    }
+
+    @Override
+    public void getMovies(int visibleItemCount, int totalItemCount, int firstVisibleItemPosition) {
+        if (state != State.LOADING && currentPage <= totalPages) {
+            if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                    && firstVisibleItemPosition >= 0
+                    && totalItemCount >= 20) {
+                getMovies();
+            }
+        }
     }
 }
