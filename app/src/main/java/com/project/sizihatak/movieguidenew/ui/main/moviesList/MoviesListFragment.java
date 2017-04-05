@@ -33,6 +33,7 @@ public class MoviesListFragment
         Bundle args = new Bundle();
         MoviesListFragment fragment = new MoviesListFragment();
         fragment.setArguments(args);
+        fragment.setRetainInstance(true);
         return fragment;
     }
 

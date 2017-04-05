@@ -1,9 +1,9 @@
 package com.project.sizihatak.movieguidenew.data;
 
-import com.project.sizihatak.movieguidenew.data.network.MovieGuideApi;
+import com.project.sizihatak.movieguidenew.data.network.model.GetMovieResponse;
+
+import io.reactivex.Single;
 
 public interface DataManager {
-    MovieGuideApi getApi();
-    String getEndPoint();
-    String getPosterEndPoint();
+    Single<GetMovieResponse> getMovies(int page);
 }

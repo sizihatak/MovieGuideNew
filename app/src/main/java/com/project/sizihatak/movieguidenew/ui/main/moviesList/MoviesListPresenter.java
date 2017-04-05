@@ -38,7 +38,7 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
     }
 
     private void getMovies() {
-        getDataManager().getApi().getMovies(++currentPage)
+        getDataManager().getMovies(++currentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
@@ -51,19 +51,13 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
                         getMvpView().onError("Error on server");
                     }
                 })
-                .doOnSuccess(response -> {
-                    currentPage = response.getPage();
-                    totalPages = response.getTotalPages();
-                    for (Movie movie : response.getMovies()) {
-                        movie.addEndPointToPosterPath(getDataManager().getPosterEndPoint());
-                        movie.addEndPointToBackdropPath(getDataManager().getPosterEndPoint());
-                    }
-                })
-                .doAfterSuccess(
+                .doOnSuccess(
                         response -> {
+                            state = State.IDEAL;
+                            currentPage = response.getPage();
+                            totalPages = response.getTotalPages();
                             movies.addAll(response.getMovies());
                             getMvpView().showMovies(movies);
-                            state = State.IDEAL;
                         }
                 )
                 .subscribe((o, throwable) -> {
