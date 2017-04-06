@@ -10,6 +10,7 @@ public class MoviesListContract {
     public interface Presenter<V extends MvpView> extends MvpPresenter<V> {
         void onMoviePressed(int position);
         void getMovies(int visibleItemCount, int totalItemCount, int firstVisibleItemPosition);
+        void refreshMovies();
     }
 
     public interface View extends MvpView {

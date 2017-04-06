@@ -2,6 +2,7 @@ package com.project.sizihatak.movieguidenew.ui.main.moviesList;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,6 +28,10 @@ public class MoviesListFragment
 
     @BindView(R.id.recyclerView_main_movies)
     RecyclerView moviesRecyclerView;
+
+    @BindView(R.id.swipeRefresh_main_movies)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     private MoviesAdapter adapter;
 
     public static MoviesListFragment newInstance() {
@@ -80,10 +85,12 @@ public class MoviesListFragment
                 presenter.getMovies(visibleItemCount, totalItemCount, firstVisibleItemPosition);
             }
         });
+        swipeRefreshLayout.setOnRefreshListener(() -> presenter.refreshMovies());
     }
 
     @Override
     public void showMovies(List<Movie> movies) {
+        swipeRefreshLayout.setRefreshing(false);
         adapter.setMovies(movies);
         adapter.notifyDataSetChanged();
     }

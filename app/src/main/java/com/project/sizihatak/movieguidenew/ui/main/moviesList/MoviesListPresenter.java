@@ -33,17 +33,19 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
     public void onAttach(MoviesListContract.View mvpView) {
         super.onAttach(mvpView);
         if (state == State.EMPTY) {
-            getMovies();
+            getMovies(true);
         }
     }
 
-    private void getMovies() {
+    private void getMovies(boolean isShowProgressBar) {
         getDataManager().getMovies(++currentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
                     state = State.LOADING;
-                    getMvpView().showLoading();
+                    if (isShowProgressBar) {
+                        getMvpView().showLoading();
+                    }
                 })
                 .doOnError(throwable -> {
                     state = State.ERROR;
@@ -78,8 +80,15 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
             if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                     && firstVisibleItemPosition >= 0
                     && totalItemCount >= 20) {
-                getMovies();
+                getMovies(true);
             }
         }
+    }
+
+    @Override
+    public void refreshMovies() {
+        movies.clear();
+        currentPage = 0;
+        getMovies(false);
     }
 }
