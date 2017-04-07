@@ -5,7 +5,9 @@ import android.support.annotation.NonNull;
 import com.project.sizihatak.movieguidenew.data.network.ApiHelper;
 import com.project.sizihatak.movieguidenew.data.network.MovieGuideApi;
 import com.project.sizihatak.movieguidenew.data.network.model.GetMovieResponse;
+import com.project.sizihatak.movieguidenew.data.network.model.GetTrailersResponse;
 import com.project.sizihatak.movieguidenew.data.network.model.Movie;
+import com.project.sizihatak.movieguidenew.data.network.model.Trailer;
 
 import javax.inject.Inject;
 
@@ -33,6 +35,22 @@ public class AppDataManager implements DataManager {
             for (Movie movie : response.getMovies()) {
                 movie.addEndPointToPosterPath(apiHelper.getPosterEndPoint());
                 movie.addEndPointToBackdropPath(apiHelper.getPosterEndPoint());
+            }
+            return response;
+        };
+    }
+
+    @Override
+    public Single<GetTrailersResponse> getTrailers(String trailerId) {
+        return apiHelper.getApi().getTrailers(trailerId)
+                .map(createThumbnailPathFunction());
+    }
+
+    @NonNull
+    private Function<GetTrailersResponse, GetTrailersResponse> createThumbnailPathFunction() {
+        return response -> {
+            for (Trailer trailer : response.getTrailers()) {
+                trailer.setThumbnailPath(String.format(apiHelper.getTrailerThumbnail(), trailer.getKey()));
             }
             return response;
         };

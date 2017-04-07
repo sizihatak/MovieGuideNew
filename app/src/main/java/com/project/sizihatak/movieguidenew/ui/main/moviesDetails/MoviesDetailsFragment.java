@@ -2,6 +2,8 @@ package com.project.sizihatak.movieguidenew.ui.main.moviesDetails;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.project.sizihatak.movieguidenew.R;
 import com.project.sizihatak.movieguidenew.data.network.model.Movie;
+import com.project.sizihatak.movieguidenew.data.network.model.Trailer;
 import com.project.sizihatak.movieguidenew.ui.base.BaseFragment;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +44,12 @@ public class MoviesDetailsFragment
     @BindView(R.id.textView_moviesDetails_descriptions)
     TextView descriptionsTextView;
 
+    @BindView(R.id.recyclerView_moviesDetails_trailers)
+    RecyclerView trailersRecyclerView;
+
+    private TrailersAdapter adapter;
+
+
     public static MoviesDetailsFragment newInstance(Bundle args) {
         MoviesDetailsFragment fragment = new MoviesDetailsFragment();
         fragment.setArguments(args);
@@ -51,10 +62,13 @@ public class MoviesDetailsFragment
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movies_details, container, false);
         setUnBinder(ButterKnife.bind(this, view));
-
-        showMovieDetails(getArguments().getParcelable(MOVIE));
-
         return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        adapter = new TrailersAdapter(this);
     }
 
     public void showMovieDetails(Movie movie) {
@@ -71,14 +85,33 @@ public class MoviesDetailsFragment
     }
 
     @Override
-    public void onStart() {
-        getFragmentComponent().inject(this);
-        super.onStart();
+    protected void setUp(View view) {
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        trailersRecyclerView.setHasFixedSize(true);
+        trailersRecyclerView.setLayoutManager(layoutManager);
+        trailersRecyclerView.setAdapter(adapter);
+    }
+
+
+    @Override
+    public void showTrailers(List<Trailer> trailers) {
+        adapter.setTrailers(trailers);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
-    protected void setUp(View view) {
+    public void onTrailerClick(int position) {
+
     }
+
+    @Override
+    public void onStart() {
+        getFragmentComponent().inject(this);
+        presenter.setMovie(getArguments().getParcelable(MOVIE));
+        super.onStart();
+    }
+
 
     @Override
     public void onDestroyView() {

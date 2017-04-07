@@ -10,4 +10,6 @@ public interface ApiHelper<T> {
     String getEndPoint();
 
     String getPosterEndPoint();
+
+    String getTrailerThumbnail();
 }

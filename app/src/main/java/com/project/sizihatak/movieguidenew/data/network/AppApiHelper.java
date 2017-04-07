@@ -34,4 +34,10 @@ public class AppApiHelper implements ApiHelper<MovieGuideApi>{
     public String getPosterEndPoint() {
         return ApiEndPoint.POSTER_END_POINT;
     }
+
+    @Override
+    public String getTrailerThumbnail () {
+        return ApiEndPoint.GET_THUMBNAIL_FOR_TRAILER;
+    }
+
 }

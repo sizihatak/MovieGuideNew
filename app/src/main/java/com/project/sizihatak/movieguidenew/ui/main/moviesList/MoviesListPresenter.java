@@ -38,7 +38,7 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
     }
 
     private void getMovies(boolean isShowProgressBar) {
-        getDataManager().getMovies(++currentPage)
+        getCompositeDisposable().add(getDataManager().getMovies(++currentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
@@ -66,7 +66,7 @@ public class MoviesListPresenter extends BasePresenter<MoviesListContract.View>
                     getCompositeDisposable().clear();
                     if (isViewAttached())
                         getMvpView().hideLoading();
-                });
+                }));
     }
 
     @Override
