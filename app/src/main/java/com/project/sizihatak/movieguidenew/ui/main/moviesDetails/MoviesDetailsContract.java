@@ -10,11 +10,17 @@ import java.util.List;
 public class MoviesDetailsContract {
     public interface Presenter<V extends MvpView> extends MvpPresenter<V> {
         void setMovie(Movie movie);
+
+        void onTrailerPressed(int position);
     }
 
     public interface View extends MvpView {
         void showMovieDetails(Movie movie);
+
         void showTrailers(List<Trailer> trailers);
+
         void onTrailerClick(int position);
+
+        void showYoutubeTrailer(String path);
     }
 }

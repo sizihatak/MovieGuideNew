@@ -15,6 +15,8 @@ public class ApiEndPoint {
     protected static final String GET_TRAILERS = "movie/{id}/videos?api_key=" + API_KEY;
     protected static final String GET_REVIEWS = "movie/%s/reviews?api_key=" + API_KEY;
 
+    protected static final String GET_VIDEO_FOR_TRAILER = "http://www.youtube.com/watch?v=%s";
+
     private ApiEndPoint() {
         // This class is not publicly instantiable
     }

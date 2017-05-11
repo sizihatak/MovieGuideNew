@@ -27,6 +27,8 @@ public class Trailer {
 
     private String thumbnailPath;
 
+    private String trailerYoutubeVideoPath;
+
     public String getId() {
         return id;
     }
@@ -73,5 +75,13 @@ public class Trailer {
 
     public void setThumbnailPath(String thumbnailPath) {
         this.thumbnailPath = thumbnailPath;
+    }
+
+    public String getTrailerYoutubeVideoPath() {
+        return trailerYoutubeVideoPath;
+    }
+
+    public void setTrailerYoutubeVideoPath(String trailerYoutubeVideoPath) {
+        this.trailerYoutubeVideoPath = trailerYoutubeVideoPath;
     }
 }

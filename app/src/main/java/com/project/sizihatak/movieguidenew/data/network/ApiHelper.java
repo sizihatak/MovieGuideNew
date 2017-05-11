@@ -12,4 +12,6 @@ public interface ApiHelper<T> {
     String getPosterEndPoint();
 
     String getTrailerThumbnail();
+
+    String getYoutubeVideoTrailer();
 }

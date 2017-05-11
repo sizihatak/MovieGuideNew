@@ -40,4 +40,9 @@ public class AppApiHelper implements ApiHelper<MovieGuideApi>{
         return ApiEndPoint.GET_THUMBNAIL_FOR_TRAILER;
     }
 
+    @Override
+    public String getYoutubeVideoTrailer () {
+        return ApiEndPoint.GET_VIDEO_FOR_TRAILER;
+    }
+
 }

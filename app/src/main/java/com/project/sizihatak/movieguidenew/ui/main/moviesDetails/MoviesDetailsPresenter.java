@@ -3,7 +3,11 @@ package com.project.sizihatak.movieguidenew.ui.main.moviesDetails;
 import com.anadeainc.rxbus.Bus;
 import com.project.sizihatak.movieguidenew.data.DataManager;
 import com.project.sizihatak.movieguidenew.data.network.model.Movie;
+import com.project.sizihatak.movieguidenew.data.network.model.Trailer;
 import com.project.sizihatak.movieguidenew.ui.base.BasePresenter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -15,6 +19,7 @@ import io.reactivex.schedulers.Schedulers;
 public class MoviesDetailsPresenter extends BasePresenter<MoviesDetailsContract.View> implements MoviesDetailsContract.Presenter<MoviesDetailsContract.View> {
 
     private Movie movie;
+    private List<Trailer> trailers = new ArrayList<>();
 
     @Inject
     MoviesDetailsPresenter(Bus eventBus, CompositeDisposable compositeDisposable, DataManager dataManager) {
@@ -45,7 +50,8 @@ public class MoviesDetailsPresenter extends BasePresenter<MoviesDetailsContract.
                 .doOnSuccess(
                         response -> {
                             state = State.IDEAL;
-                            getMvpView().showTrailers(response.getTrailers());
+                            trailers = response.getTrailers();
+                            getMvpView().showTrailers(trailers);
                         }
                 )
                 .subscribe((o, throwable) -> {
@@ -59,5 +65,10 @@ public class MoviesDetailsPresenter extends BasePresenter<MoviesDetailsContract.
     @Override
     public void setMovie(Movie movie) {
         this.movie = movie;
+    }
+
+    @Override
+    public void onTrailerPressed(int position) {
+        getMvpView().showYoutubeTrailer(trailers.get(position).getTrailerYoutubeVideoPath());
     }
 }

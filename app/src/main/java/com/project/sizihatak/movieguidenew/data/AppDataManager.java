@@ -51,6 +51,7 @@ public class AppDataManager implements DataManager {
         return response -> {
             for (Trailer trailer : response.getTrailers()) {
                 trailer.setThumbnailPath(String.format(apiHelper.getTrailerThumbnail(), trailer.getKey()));
+                trailer.setTrailerYoutubeVideoPath(String.format(apiHelper.getYoutubeVideoTrailer(), trailer.getKey()));
             }
             return response;
         };
